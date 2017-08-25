@@ -1,0 +1,135 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "Funcoes.h"
+#include <stdlib.h>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+
+#define TAMANHO_MATRIZ 5
+#define TAMANHO_VETOR 10
+
+#define ESCOPO_BUSCA_MATRIZ_DIAGONALPRINCIPAL 1
+#define ESCOPO_BUSCA_MATRIZ_DIAGONALSECUNDARIA 2
+#define ESCOPO_BUSCA_MATRIZ_DIAGONAIS 3
+#define ESCOPO_BUSCA_MATRIZ_COMPLETA 4
+
+
+	srand(time(NULL));
+	int vetor[TAMANHO_VETOR];
+	int matriz[TAMANHO_MATRIZ][TAMANHO_MATRIZ];
+
+	for (int i = 0; i < TAMANHO_VETOR; i++)
+	{
+		vetor[i] = rand() % 50;
+	}
+
+	for (int linha = 0; linha < TAMANHO_MATRIZ; linha++)
+	{
+		for (int coluna = 0; coluna < TAMANHO_MATRIZ; coluna++)
+		{
+			matriz[linha][coluna] = rand() % 50;
+		}
+	}
+	
+	cout << "VETOR ORIGINAL" << endl;
+
+	for (int i = 0; i < TAMANHO_VETOR; i++)
+	{
+		cout << vetor[i] << " | ";
+	}
+
+	cout << endl << endl;
+	cout << "MATRIZ";
+
+	for (int linha = 0; linha < TAMANHO_MATRIZ; linha++)
+	{
+		cout << endl;
+		for (int coluna = 0; coluna < TAMANHO_MATRIZ; coluna++)
+		{
+			cout << matriz[linha][coluna] << " | ";
+		}
+	}
+
+	cout << endl << endl;
+
+	bubbleSort(vetor, TAMANHO_VETOR, true);
+
+	cout << "VETOR ORDENACAO CRESCENTE" << endl;
+
+	for (int i = 0; i < TAMANHO_VETOR; i++)
+	{
+		cout << vetor[i] << " | ";
+	}
+
+	cout << endl << endl;
+
+	bubbleSort(vetor, TAMANHO_VETOR, false);
+
+	cout << "VETOR ORDENACAO DECRESCENTE" << endl;
+
+	for (int i = 0; i < TAMANHO_VETOR; i++)
+	{
+		cout << vetor[i] << " | ";
+	}
+
+	cout << endl << endl;
+
+	int maiorValorVetor = maiorValorEmVetor(vetor, TAMANHO_VETOR);
+	cout << "Maior valor do vetor: " << maiorValorVetor;
+
+	cout << endl << endl;
+
+	int menorValorVetor = menorValorEmVetor(vetor, TAMANHO_VETOR);
+	cout << "Menor valor do vetor: " << menorValorVetor;
+
+	cout << endl << endl;
+	cout << "----Maiores Valores----" << endl;
+
+	int maiorValorDP = maiorValorEmMatriz(matriz, 1);
+	cout << "Maior valor da diagonal principal: " << maiorValorDP;
+
+	cout << endl << endl;
+
+	int maiorValorDS = maiorValorEmMatriz(matriz, 2);
+	cout << "Maior valor da diagonal secundaria: " << maiorValorDS;
+
+	cout << endl << endl;
+
+	int maiorValorDiagonais = maiorValorEmMatriz(matriz, 3);
+	cout << "Maior valor das diagonais: " << maiorValorDiagonais;
+
+	cout << endl << endl;
+
+	int maiorValorMatriz = maiorValorEmMatriz(matriz, 4);
+	cout << "Maior valor da matriz: " << maiorValorMatriz;
+
+	cout << endl << endl;
+	cout << "----Menores Valores----" << endl;
+
+	int menorValorDP = menorValorEmMatriz(matriz, 1);
+	cout << "Menor valor da diagonal principal: " << menorValorDP;
+
+	cout << endl << endl;
+
+	int menorValorDS = menorValorEmMatriz(matriz, 2);
+	cout << "Menor valor da diagonal secundaria: " << menorValorDS;
+
+	cout << endl << endl;
+
+	int menorValorDiagonais = menorValorEmMatriz(matriz, 3);
+	cout << "Menor valor das diagonais: " << menorValorDiagonais;
+
+	cout << endl << endl;
+
+	int menorValorMatriz = menorValorEmMatriz(matriz, 4);
+	cout << "Menor valor da matriz: " << menorValorMatriz;
+
+	cout << endl;
+
+	return 0;
+}
