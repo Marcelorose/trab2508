@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #define TAMANHO_MATRIZ 3
-	
+
 using namespace std;
 
 int menu() {
@@ -19,12 +19,25 @@ int menu() {
 }
 
 void escreverMatriz(char matriz[3][3]) {
+	int  tc = 179, r;
+	char t[11], c = 181;
 
-	cout << "  0  1  2" << endl;
-	cout << "0" << " " << matriz[0][0] << "  " << matriz[0][1] << "  " << matriz[0][2] << endl;
-	cout << "1" << " " << matriz[1][0] << "  " << matriz[1][1] << "  " << matriz[1][2] << endl;
-	cout << "2" << " " << matriz[2][0] << "  " << matriz[2][1] << "  " << matriz[2][2] << endl;
+	for (r = 0; r<11; r++) //atribui ao vetor t[] as partes da tabela.
+	{
+		t[r] = tc;
+		tc++;
+		if (tc == 181)tc = 191;
+		if (tc == 198)tc = 217;
+	}
 
+	cout << "    0   1   2" << endl;
+	cout << "  " << t[10] << t[7] << t[7] << t[7] << t[5] << t[7] << t[7] << t[7] << t[5] << t[7] << t[7] << t[7] << t[2] << endl;
+	cout << "0 " << t[0] << " " << matriz[0][0] << " " << t[0] << " " << matriz[0][1] << " " << t[0] << " " << matriz[0][2] << " " << t[0] << endl;
+	cout << "  " << t[6] << t[7] << t[7] << t[7] << t[8] << t[7] << t[7] << t[7] << t[8] << t[7] << t[7] << t[7] << t[1] << endl;
+	cout << "1 " << t[0] << " " << matriz[1][0] << " " << t[0] << " " << matriz[1][1] << " " << t[0] << " " << matriz[1][2] << " " << t[0] << endl;
+	cout << "  " << t[6] << t[7] << t[7] << t[7] << t[8] << t[7] << t[7] << t[7] << t[8] << t[7] << t[7] << t[7] << t[1] << endl;
+	cout << "2 " << t[0] << " " << matriz[2][0] << " " << t[0] << " " << matriz[2][1] << " " << t[0] << " " << matriz[2][2] << " " << t[0] << endl;
+	cout << "  " << t[3] << t[7] << t[7] << t[7] << t[4] << t[7] << t[7] << t[7] << t[4] << t[7] << t[7] << t[7] << t[9] << endl;
 }
 
 void jogo(int opcao, char matriz[3][3]) {
@@ -68,7 +81,7 @@ void jogo(int opcao, char matriz[3][3]) {
 				}
 			}
 			//vencedor(matriz);
-			else{
+			else {
 				cout << "Linha: ";
 				cin >> linhaEscolhida;
 				cout << "Coluna: ";
@@ -111,32 +124,32 @@ void jogo(int opcao, char matriz[3][3]) {
 }
 
 /*void vencedor(char matriz[3][3]) {
-	int verificacaoX = 0;
-	int verificacaoO = 0;
-	for (int linha = 0; linha < 3; linha++)
-	{
-		for (int coluna = 0; coluna < 3; coluna++)
-		{
-			int X = 0;
-			int O = 0;
-			if (matriz[linha][coluna] == 'X') {
-				X++;
-				verificacaoX = X;
-			}
-			else {
-				O++;
-				verificacaoO = O;
-			}
-		}
-		if (verificacaoX == 3 || verificacaoO == 3) {
-			if (verificacaoX == 3) {
-				cout << "O jogador X venceu!!";
-			}
-			else if (verificacaoO == 3) {
-				cout << "O jogador O venceu!!";
-			}
-		}
-	}
+int verificacaoX = 0;
+int verificacaoO = 0;
+for (int linha = 0; linha < 3; linha++)
+{
+for (int coluna = 0; coluna < 3; coluna++)
+{
+int X = 0;
+int O = 0;
+if (matriz[linha][coluna] == 'X') {
+X++;
+verificacaoX = X;
+}
+else {
+O++;
+verificacaoO = O;
+}
+}
+if (verificacaoX == 3 || verificacaoO == 3) {
+if (verificacaoX == 3) {
+cout << "O jogador X venceu!!";
+}
+else if (verificacaoO == 3) {
+cout << "O jogador O venceu!!";
+}
+}
+}
 }*/
 
 
