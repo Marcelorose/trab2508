@@ -1,0 +1,18 @@
+#include "stdafx.h"
+#include <iostream>
+#include "Funcoes.h"
+
+using namespace std;
+
+#define TAMANHO_MATRIZ 3
+
+int main()
+{
+	char matrizJogo[TAMANHO_MATRIZ][TAMANHO_MATRIZ] = {'.'};
+    int opcao = menu();
+	escreverMatriz(matrizJogo);
+	jogo(opcao, matrizJogo);
+	
+	
+    return 0;
+}
