@@ -4,7 +4,10 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+#include <cstdlib>
 #define TAMANHO_MATRIZ 3
+#define mensagemErro "Valor invalido"
 
 using namespace std;
 
@@ -15,6 +18,46 @@ int menu() {
 	cout << "(1) contra um outro jogador" << endl << "(2) contra a CPU" << endl << "Opcao: ";
 	cin >> opcao;
 	return opcao;
+
+}
+
+int ganhou(char matriz[3][3]) {
+	//HORIZONTAIS
+	int vencedor = 0;
+
+	if (matriz[0][0] == 'X' && matriz[0][1] == 'X' && matriz[0][2] == 'X') vencedor = 1;
+	if (matriz[1][0] == 'X' && matriz[1][1] == 'X' && matriz[1][2] == 'X') vencedor = 1;
+	if (matriz[2][0] == 'X' && matriz[2][1] == 'X' && matriz[2][2] == 'X') vencedor = 1;
+	if (matriz[0][0] == 'O' && matriz[0][1] == 'O' && matriz[0][2] == 'O') vencedor = 2;
+	if (matriz[1][0] == 'O' && matriz[1][1] == 'O' && matriz[1][2] == 'O') vencedor = 2;
+	if (matriz[2][0] == 'O' && matriz[2][1] == 'O' && matriz[2][2] == 'O') vencedor = 2;
+	//VERTICAIS
+	if (matriz[0][0] == 'X' && matriz[1][0] == 'X' && matriz[2][0] == 'X') vencedor = 1;
+	if (matriz[0][1] == 'X' && matriz[1][1] == 'X' && matriz[2][1] == 'X') vencedor = 1;
+	if (matriz[0][2] == 'X' && matriz[1][2] == 'X' && matriz[2][2] == 'X') vencedor = 1;
+	if (matriz[0][0] == 'O' && matriz[1][0] == 'O' && matriz[2][0] == 'O') vencedor = 2;
+	if (matriz[0][1] == 'O' && matriz[1][1] == 'O' && matriz[2][1] == 'O') vencedor = 2;
+	if (matriz[0][2] == 'O' && matriz[1][2] == 'O' && matriz[2][2] == 'O') vencedor = 2;
+	//DIAGONAIS
+	if (matriz[0][0] == 'X' && matriz[1][1] == 'X' && matriz[2][2] == 'X') vencedor = 1;
+	if (matriz[0][2] == 'X' && matriz[1][1] == 'X' && matriz[2][0] == 'X') vencedor = 1;
+	if (matriz[0][0] == 'O' && matriz[1][1] == 'O' && matriz[2][2] == 'O') vencedor = 2;
+	if (matriz[0][2] == 'O' && matriz[1][1] == 'O' && matriz[2][0] == 'O') vencedor = 2;
+	//EMPATE
+	//if (matriz[0][0] != ' ' &&matriz[0][1] != ' ' &&matriz[0][2] != ' ' &&matriz[1][0] != ' ' &&matriz[1][1] != ' ' &&matriz[1][2] != ' ' &&matriz[2][0] != ' ' &&matriz[2][1] != ' ' &&matriz[2][2] != ' ' && vencedor != 1 && vencedor != 2) vencedor = 3;
+	return vencedor;
+}
+
+void fraseVencedor(int vencedor) {
+	if (vencedor == 3) {
+		cout << "EMPATE!!";
+	}
+	else if (vencedor == 1) {
+		cout << "O JOGADOR 'X' GANHOU!!";
+	}
+	else if (vencedor == 2) {
+		cout << "O JOGADOR 'O' VENCEU!!";
+	}
 
 }
 
@@ -42,116 +85,78 @@ void escreverMatriz(char matriz[3][3]) {
 
 void jogo(int opcao, char matriz[3][3]) {
 	if (opcao == 1) {
-		int linhaEscolhida;
-		int colunaEscolhida;
-		for (int numeroJogadas = 0; numeroJogadas < 10; numeroJogadas++)
+		for (int numeroJogadas = 0; numeroJogadas < 9; numeroJogadas++)
 		{
-			if (numeroJogadas % 2 == 0) {
-				cout << "Linha: ";
-				cin >> linhaEscolhida;
-				cout << "Coluna: ";
-				cin >> colunaEscolhida;
-				matriz[linhaEscolhida][colunaEscolhida] = 'X';
+			int linhaEscolhida;
+			int colunaEscolhida;
 
-				int verificacaoX = 0;
-				int verificacaoO = 0;
-				for (int linha = 0; linha < 3; linha++)
-				{
-					for (int coluna = 0; coluna < 3; coluna++)
-					{
-						int X = 0;
-						int O = 0;
-						if (matriz[linha][coluna] == 'X') {
-							X++;
-							verificacaoX = X;
-						}
-						else {
-							O++;
-							verificacaoO = O;
-						}
-					}
-					if (verificacaoX == 3 || verificacaoO == 3) {
-						if (verificacaoX == 3) {
-							cout << "O jogador X venceu!!";
-						}
-						else if (verificacaoO == 3) {
-							cout << "O jogador O venceu!!";
-						}
-					}
-				}
-			}
-			//vencedor(matriz);
-			else {
-				cout << "Linha: ";
+			cout << "Digite a linha: ";
+			cin >> linhaEscolhida;
+			cout << "Digite a coluna: ";
+			cin >> colunaEscolhida;
+			while (matriz[linhaEscolhida][colunaEscolhida] == 'X' || matriz[linhaEscolhida][colunaEscolhida] == 'O') {
+				cout << "Erro! Campo ja usado" << endl << endl;
+				cout << "Digite a linha: ";
 				cin >> linhaEscolhida;
-				cout << "Coluna: ";
+				cout << "Digite a coluna: ";
 				cin >> colunaEscolhida;
-				matriz[linhaEscolhida][colunaEscolhida] = 'O';
 			}
-			int verificacaoX = 0;
-			int verificacaoO = 0;
-			for (int linha = 0; linha < 3; linha++)
+			while (linhaEscolhida != 0 && linhaEscolhida != 1 && linhaEscolhida != 2 || colunaEscolhida != 0 && colunaEscolhida != 1 && colunaEscolhida != 2)
 			{
-				for (int coluna = 0; coluna < 3; coluna++)
-				{
-					int X = 0;
-					int O = 0;
-					if (matriz[linha][coluna] == 'X') {
-						X++;
-						verificacaoX = X;
-					}
-					else {
-						O++;
-						verificacaoO = O;
-					}
-				}
-				if (verificacaoX == 3 || verificacaoO == 3) {
-					if (verificacaoX == 3) {
-						cout << "O jogador X venceu!!";
-					}
-					else if (verificacaoO == 3) {
-						cout << "O jogador O venceu!!";
-					}
-				}
+				cout << "Fila inexistente" << endl << endl;
+				cout << "Digite a linha: ";
+				cin >> linhaEscolhida;
+				cout << "Digite a coluna: ";
+				cin >> colunaEscolhida;
+
 			}
+
+			matriz[linhaEscolhida][colunaEscolhida] = 'X';
+			system("cls");
 			escreverMatriz(matriz);
+			int vencedor = ganhou(matriz);
+			fraseVencedor(vencedor);
+
+
+
+			
+			cout << "Digite a linha: ";
+			cin >> linhaEscolhida;
+			cout << "Digite a coluna: ";
+			cin >> colunaEscolhida;
+			while (matriz[linhaEscolhida][colunaEscolhida] == 'X' || matriz[linhaEscolhida][colunaEscolhida] == 'O') {
+				cout << "Erro! Campo ja usado" << endl << endl;
+				cout << "Digite a linha: ";
+				cin >> linhaEscolhida;
+				cout << "Digite a coluna: ";
+				cin >> colunaEscolhida;
+			}
+			while (linhaEscolhida != 0 && linhaEscolhida != 1 && linhaEscolhida != 2 || colunaEscolhida != 0 && colunaEscolhida != 1 && colunaEscolhida != 2)
+			{
+				cout << "Fila inexistente" << endl << endl;
+				cout << "Digite a linha: ";
+				cin >> linhaEscolhida;
+				cout << "Digite a coluna: ";
+				cin >> colunaEscolhida;
+
+			}
+
+			matriz[linhaEscolhida][colunaEscolhida] = 'O';
+			system("cls");
+			escreverMatriz(matriz);
+			vencedor = ganhou(matriz);
+			fraseVencedor(vencedor);
+			jogadas++;
+			if(jogadas == 8){
+				cout << "EMPATE!!";
+			}
 		}
 	}
-
-	else {
-
+	else if (opcao == 9) {
+		cout << "Empate!!";
 	}
 }
-
-/*void vencedor(char matriz[3][3]) {
-int verificacaoX = 0;
-int verificacaoO = 0;
-for (int linha = 0; linha < 3; linha++)
-{
-for (int coluna = 0; coluna < 3; coluna++)
-{
-int X = 0;
-int O = 0;
-if (matriz[linha][coluna] == 'X') {
-X++;
-verificacaoX = X;
-}
-else {
-O++;
-verificacaoO = O;
-}
-}
-if (verificacaoX == 3 || verificacaoO == 3) {
-if (verificacaoX == 3) {
-cout << "O jogador X venceu!!";
-}
-else if (verificacaoO == 3) {
-cout << "O jogador O venceu!!";
-}
-}
-}
-}*/
-
+	
 
 
 #endif
